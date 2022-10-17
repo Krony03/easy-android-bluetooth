@@ -1,6 +1,19 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'maven-publish'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId = 'com.github.krony03'
+                artifactId = 'easy-android-btscanner'
+                version = '1.0.0'
+            }
+        }
+    }
 }
 
 android {
