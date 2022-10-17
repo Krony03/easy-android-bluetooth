@@ -32,8 +32,8 @@ class EasyBluetoothScanner(
         private val context: Context,
         private val scanCallback: ScanCallback
     ) {
-        private var scanSettings: ScanSettings = ScanSettings.Builder().build()
-        private var scanFilters: List<ScanFilter> = emptyList()
+        var scanSettings: ScanSettings = ScanSettings.Builder().build()
+        var scanFilters: List<ScanFilter> = emptyList()
 
         fun setScanSettings(scanSettings: ScanSettings): Builder {
             this.scanSettings = scanSettings
@@ -54,7 +54,7 @@ class EasyBluetoothScanner(
         fun build(
             context: Context,
             scanCallback: ScanCallback,
-            block: Builder.(context: Context, scanCallback: ScanCallback) -> Unit
-        ) = Builder(context, scanCallback).apply { block(context, scanCallback) }.build()
+            block: Builder.() -> Unit
+        ) = Builder(context, scanCallback).apply { block() }.build()
     }
 }

@@ -1,6 +1,9 @@
 package mfstech.showdown.btscanner
 
+import android.bluetooth.le.ScanFilter
 import android.bluetooth.le.ScanResult
+import android.bluetooth.le.ScanSettings
+import android.content.Context
 import mfstech.showdown.btscanner.internal.OnBatchScanResult
 import mfstech.showdown.btscanner.internal.OnScanFailed
 import mfstech.showdown.btscanner.internal.OnScanResult
@@ -56,4 +59,17 @@ class ScanCallback private constructor(
     companion object {
         fun build(block: Builder.() -> Unit) = Builder().apply(block).build()
     }
+}
+
+fun test(context: Context) {
+    val scanCallback = ScanCallback.Builder()
+        .setOnScanFailed {  }
+        .setOnBatchScanResult {  }
+        .setOnScanResult { _, _ ->  }
+        .build()
+
+    EasyBluetoothScanner.Builder(context, scanCallback)
+        .setScanFilters(emptyList())
+        .setScanSettings(ScanSettings.Builder().build())
+        .build()
 }
